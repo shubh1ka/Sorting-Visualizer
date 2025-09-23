@@ -1,0 +1,10 @@
+#bars{
+    display: flex;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.bar{
+    width: 20px;
+    background: steelblue;
+}
