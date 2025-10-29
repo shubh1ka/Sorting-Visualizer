@@ -1,13 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sorting Visualizer</title>
-    <link rel="Stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <title>Bubble Sort Visualizer</title>
+  <style>
+    
+    .intro {
+        max-width: 700px;
+        margin: 20px auto;
+        background: #e8f0fe;
+        padding: 15px 20px;
+        border-left: 5px solid #007bff;
+        border-radius: 8px;
+        text-align: left;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .intro code {
+    background: #f1f1f1;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      color: #222;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      padding: 10px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+    .step {
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: fit-content;
+    }
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .box {
+      background: #5da3fa;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 15px;
+      border-radius: 10px;
+      width: 40px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .box.changed {
+      background: #ff6b6b;
+    }
+  </style>
 </head>
 <body>
-    <h1>Sorting Visualizer</h1>
-    <button onclick="startSort()">Start sorting</button>
-    <div id="bars"></div>
-    <script src="/script.js"></script>
+  <h2>Bubble Sort Visualizer</h2>
+  <div class="intro">
+  <p>
+    <strong>Bubble Sort</strong> is a simple comparison-based sorting algorithm. 
+    It repeatedly steps through the list, compares adjacent elements, and swaps them 
+    if they are in the wrong order. This process continues until the list is sorted.
+  </p>
+  <p>
+    Although it’s not the most efficient algorithm (with a time complexity of 
+    <code>O(n²)</code>), it’s a great way to understand the fundamentals of 
+    sorting and algorithmic thinking.
+  </p>
+  </div>
+
+  
+
+  <form action="/bubble" method="get">
+    <input type="text" name="arr" placeholder="Enter numbers e.g. 6,2,8,4,10" required>
+    <button type="submit">Visualize</button>
+  </form>
+
+  <div class="steps-container" th:if="${steps}">
+    <div th:each="step, stepStat : ${steps}" class="step">
+      <h4>Step [[${stepStat.index}]]</h4>
+      <div class="row">
+        <div th:each="num : ${step}" class="box">[[${num}]]</div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
